@@ -8,7 +8,7 @@
 import UIKit
 import AVKit
 
-class PlayMusic: UIView
+open class PlayMusic: UIView
 {
     let imgView: UIImageView =
     {
@@ -160,7 +160,7 @@ class PlayMusic: UIView
         
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
