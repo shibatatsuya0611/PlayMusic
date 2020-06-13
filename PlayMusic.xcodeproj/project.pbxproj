@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49581B416E7498B46C89C19A /* Pods_PlayMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090CD13684644D65CAA37E34 /* Pods_PlayMusic.framework */; };
 		4D6E2F72248DECBB00DF4FDA /* PlayMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6E2F71248DECBB00DF4FDA /* PlayMusic.swift */; };
 		4D6E2F79248DF51900DF4FDA /* MusicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6E2F78248DF51900DF4FDA /* MusicData.swift */; };
 		4D6E2F7D248DF9EA00DF4FDA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6E2F7C248DF9EA00DF4FDA /* UIView+Extension.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		090CD13684644D65CAA37E34 /* Pods_PlayMusic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlayMusic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6E2F6E248DECBB00DF4FDA /* libPlayMusic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPlayMusic.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6E2F71248DECBB00DF4FDA /* PlayMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusic.swift; sourceTree = "<group>"; };
 		4D6E2F78248DF51900DF4FDA /* MusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicData.swift; sourceTree = "<group>"; };
@@ -34,6 +36,8 @@
 		4DADD31D2494688D0006B8A6 /* Fast forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fast forward.png"; sourceTree = "<group>"; };
 		4DADD31E2494688D0006B8A6 /* play_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_2.png; sourceTree = "<group>"; };
 		4DADD31F249469B50006B8A6 /* Back track.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back track.png"; sourceTree = "<group>"; };
+		BEB52A7119CA7C80697D7A18 /* Pods-PlayMusic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayMusic.debug.xcconfig"; path = "Target Support Files/Pods-PlayMusic/Pods-PlayMusic.debug.xcconfig"; sourceTree = "<group>"; };
+		EC266321FCB8B23A29731843 /* Pods-PlayMusic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayMusic.release.xcconfig"; path = "Target Support Files/Pods-PlayMusic/Pods-PlayMusic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,18 +45,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49581B416E7498B46C89C19A /* Pods_PlayMusic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B08086E2B40D373049DC412 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BEB52A7119CA7C80697D7A18 /* Pods-PlayMusic.debug.xcconfig */,
+				EC266321FCB8B23A29731843 /* Pods-PlayMusic.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4D6E2F65248DECBB00DF4FDA = {
 			isa = PBXGroup;
 			children = (
 				4D6E2F70248DECBB00DF4FDA /* PlayMusic */,
 				4DADD31A249467DF0006B8A6 /* imag */,
 				4D6E2F6F248DECBB00DF4FDA /* Products */,
+				1B08086E2B40D373049DC412 /* Pods */,
+				9C4C4E9A8695C31122CEF2EB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +119,14 @@
 			path = imag;
 			sourceTree = "<group>";
 		};
+		9C4C4E9A8695C31122CEF2EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				090CD13684644D65CAA37E34 /* Pods_PlayMusic.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,6 +134,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D6E2F75248DECBB00DF4FDA /* Build configuration list for PBXNativeTarget "PlayMusic" */;
 			buildPhases = (
+				1ADA2EA0887EB173AD3FA228 /* [CP] Check Pods Manifest.lock */,
 				4D6E2F6A248DECBB00DF4FDA /* Sources */,
 				4D6E2F6B248DECBB00DF4FDA /* Frameworks */,
 				4D6E2F6C248DECBB00DF4FDA /* CopyFiles */,
@@ -154,6 +180,31 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1ADA2EA0887EB173AD3FA228 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlayMusic-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4D6E2F6A248DECBB00DF4FDA /* Sources */ = {
@@ -285,6 +336,7 @@
 		};
 		4D6E2F76248DECBB00DF4FDA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEB52A7119CA7C80697D7A18 /* Pods-PlayMusic.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H5FA2UGX5H;
@@ -299,6 +351,7 @@
 		};
 		4D6E2F77248DECBB00DF4FDA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC266321FCB8B23A29731843 /* Pods-PlayMusic.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H5FA2UGX5H;
