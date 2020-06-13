@@ -10,7 +10,6 @@
 		49581B416E7498B46C89C19A /* Pods_PlayMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090CD13684644D65CAA37E34 /* Pods_PlayMusic.framework */; };
 		4D6E2F72248DECBB00DF4FDA /* PlayMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6E2F71248DECBB00DF4FDA /* PlayMusic.swift */; };
 		4D6E2F79248DF51900DF4FDA /* MusicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6E2F78248DF51900DF4FDA /* MusicData.swift */; };
-		4D6E2F7D248DF9EA00DF4FDA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6E2F7C248DF9EA00DF4FDA /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,7 +29,6 @@
 		4D6E2F6E248DECBB00DF4FDA /* libPlayMusic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPlayMusic.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6E2F71248DECBB00DF4FDA /* PlayMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusic.swift; sourceTree = "<group>"; };
 		4D6E2F78248DF51900DF4FDA /* MusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicData.swift; sourceTree = "<group>"; };
-		4D6E2F7C248DF9EA00DF4FDA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		4DADD31B2494688D0006B8A6 /* icon_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_play.png; sourceTree = "<group>"; };
 		4DADD31C2494688D0006B8A6 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
 		4DADD31D2494688D0006B8A6 /* Fast forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fast forward.png"; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 				BEB52A7119CA7C80697D7A18 /* Pods-PlayMusic.debug.xcconfig */,
 				EC266321FCB8B23A29731843 /* Pods-PlayMusic.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -86,17 +83,8 @@
 			children = (
 				4D6E2F71248DECBB00DF4FDA /* PlayMusic.swift */,
 				4D6E2F7B248DF9C800DF4FDA /* Data */,
-				4D6E2F7A248DF9BA00DF4FDA /* Extension */,
 			);
 			path = PlayMusic;
-			sourceTree = "<group>";
-		};
-		4D6E2F7A248DF9BA00DF4FDA /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				4D6E2F7C248DF9EA00DF4FDA /* UIView+Extension.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 		4D6E2F7B248DF9C800DF4FDA /* Data */ = {
@@ -211,7 +199,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D6E2F7D248DF9EA00DF4FDA /* UIView+Extension.swift in Sources */,
 				4D6E2F72248DECBB00DF4FDA /* PlayMusic.swift in Sources */,
 				4D6E2F79248DF51900DF4FDA /* MusicData.swift in Sources */,
 			);
