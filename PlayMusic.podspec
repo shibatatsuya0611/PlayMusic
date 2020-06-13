@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "PlayMusic"
-  spec.version      = "0.0.1"
+  spec.version      = "1.0"
   spec.summary      = "A CocoaPods library written in Swift."
   spec.swift_version = "4.0"
 
@@ -54,7 +54,7 @@ Pod::Spec.new do |spec|
   #  profile URL.
   #
 
-  spec.author             = { "shibatatsuya0611" => "nxhuytn0611@gmail.com" }
+  spec.author             = { "shibatatsuya0611" => "shibatatsuya0611@gmail.com" }
   # Or just: spec.author    = "shibatatsuya0611"
   # spec.authors            = { "shibatatsuya0611" => "55233878+shibatatsuya0611@users.noreply.github.com" }
   # spec.social_media_url   = "https://twitter.com/shibatatsuya0611"
@@ -92,7 +92,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "PlayMusic/**/*.{h,m,swift}"
+  spec.source_files  = "PlayMusic", "PlayMusic/**/*.{h,m,swift}"
   spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
