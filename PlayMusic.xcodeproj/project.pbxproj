@@ -29,11 +29,6 @@
 		4D6E2F6E248DECBB00DF4FDA /* libPlayMusic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPlayMusic.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6E2F71248DECBB00DF4FDA /* PlayMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusic.swift; sourceTree = "<group>"; };
 		4D6E2F78248DF51900DF4FDA /* MusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicData.swift; sourceTree = "<group>"; };
-		4DADD31B2494688D0006B8A6 /* icon_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_play.png; sourceTree = "<group>"; };
-		4DADD31C2494688D0006B8A6 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
-		4DADD31D2494688D0006B8A6 /* Fast forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fast forward.png"; sourceTree = "<group>"; };
-		4DADD31E2494688D0006B8A6 /* play_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_2.png; sourceTree = "<group>"; };
-		4DADD31F249469B50006B8A6 /* Back track.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back track.png"; sourceTree = "<group>"; };
 		BEB52A7119CA7C80697D7A18 /* Pods-PlayMusic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayMusic.debug.xcconfig"; path = "Target Support Files/Pods-PlayMusic/Pods-PlayMusic.debug.xcconfig"; sourceTree = "<group>"; };
 		EC266321FCB8B23A29731843 /* Pods-PlayMusic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayMusic.release.xcconfig"; path = "Target Support Files/Pods-PlayMusic/Pods-PlayMusic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				4D6E2F70248DECBB00DF4FDA /* PlayMusic */,
-				4DADD31A249467DF0006B8A6 /* imag */,
 				4D6E2F6F248DECBB00DF4FDA /* Products */,
 				1B08086E2B40D373049DC412 /* Pods */,
 				9C4C4E9A8695C31122CEF2EB /* Frameworks */,
@@ -93,18 +87,6 @@
 				4D6E2F78248DF51900DF4FDA /* MusicData.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		4DADD31A249467DF0006B8A6 /* imag */ = {
-			isa = PBXGroup;
-			children = (
-				4DADD31D2494688D0006B8A6 /* Fast forward.png */,
-				4DADD31B2494688D0006B8A6 /* icon_play.png */,
-				4DADD31C2494688D0006B8A6 /* Pause.png */,
-				4DADD31E2494688D0006B8A6 /* play_2.png */,
-				4DADD31F249469B50006B8A6 /* Back track.png */,
-			);
-			path = imag;
 			sourceTree = "<group>";
 		};
 		9C4C4E9A8695C31122CEF2EB /* Frameworks */ = {
