@@ -14,7 +14,7 @@ open class PlayMusic: UIView
     {
        let s = UISlider()
         s.translatesAutoresizingMaskIntoConstraints = false
-//        s.backgroundColor = .blue
+        s.backgroundColor = .clear
         s.isUserInteractionEnabled = true
         s.clearsContextBeforeDrawing = true
         s.autoresizesSubviews = true
@@ -159,20 +159,21 @@ open class PlayMusic: UIView
 //        slider.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 10), size: .init(width: 0, height: 10))
         slider.topAnchor.constraint(equalTo: topAnchor).isActive = true
         slider.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        slider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        slider.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        slider.heightAnchor.constraint(equalToConstant: 10).isActive = true
         
 //        lbltimerMove.anchor(top: slider.bottomAnchor, leading: slider.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .zero)
         
-        lbltimerMove.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 10).isActive = true
-        lbltimerMove.leadingAnchor.constraint(equalTo: slider.leadingAnchor, constant: 0).isActive = true
+        lbltimerMove.topAnchor.constraint(equalTo: slider.bottomAnchor).isActive = true
+        lbltimerMove.leadingAnchor.constraint(equalTo: slider.leadingAnchor).isActive = true
         
 //        lbltimerEnd.anchor(top: slider.bottomAnchor, leading: nil, bottom: nil, trailing: slider.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .zero)
-        lbltimerEnd.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 10).isActive = true
-        lbltimerEnd.trailingAnchor.constraint(equalTo: slider.trailingAnchor, constant: 0).isActive = true
+        lbltimerEnd.topAnchor.constraint(equalTo: slider.bottomAnchor).isActive = true
+        lbltimerEnd.trailingAnchor.constraint(equalTo: slider.trailingAnchor).isActive = true
         
 //        lblSongName.anchor(top: slider.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 50, left: 0, bottom: 0, right: 0), size: .zero)
         
-        lblSongName.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 40).isActive = true
+        lblSongName.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 20).isActive = true
         lblSongName.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
 //        lblSinger.anchor(top: lblSongName.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .zero)
@@ -187,18 +188,18 @@ open class PlayMusic: UIView
         
 //        btnPrevious.anchor(top: lblSinger.bottomAnchor, leading: nil, bottom: nil, trailing: btnPlay.leadingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 40), size: .init(width: 30, height: 30))
         btnPrevious.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 20).isActive = true
-        btnPrevious.trailingAnchor.constraint(equalTo: btnPlay.leadingAnchor, constant: -40).isActive = true
+        btnPrevious.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         btnPrevious.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnPrevious.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
 //        btnNext.anchor(top: lblSinger.bottomAnchor, leading: btnPlay.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 40, left: 10, bottom: 0, right: 0), size: .init(width: 30, height: 30))
         btnNext.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 20).isActive = true
-        btnNext.leadingAnchor.constraint(equalTo: btnPlay.trailingAnchor, constant: 40).isActive = true
+        btnNext.leadingAnchor.constraint(equalTo: btnPlay.trailingAnchor, constant: 20).isActive = true
         btnNext.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnNext.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
 //        btnRepeat.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 10), size: .init(width: 30, height: 30))
-        btnRepeat.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        btnRepeat.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         btnRepeat.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnRepeat.heightAnchor.constraint(equalToConstant: 30).isActive = true
         btnRepeat.centerYAnchor.constraint(equalTo: btnNext.centerYAnchor).isActive = true
