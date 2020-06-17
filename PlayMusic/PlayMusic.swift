@@ -399,8 +399,15 @@ open class PlayMusic: UIView
                 localPlayer?.stop()
             }
         }
-        else if onlinePlayer != nil {
-            
+        else if onlinePlayer != nil
+        {
+            if sender.isSelected == true {
+                print("repeat:")
+                localPlayer?.numberOfLoops = -1
+            } else {
+                print("stopRepeat")
+                localPlayer?.stop()
+            }
         }
     }
     

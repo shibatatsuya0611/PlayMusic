@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MusicData
+open class MusicData
 {
     enum MusicType
     {
@@ -23,7 +23,7 @@ class MusicData
     var ext: String?
     var type: MusicType?
     
-    func initMusicData(musicName: String, singer: String, art: String, imgAvata: String,linkUrl: String, ext: String, type: MusicType)
+   func initMusicData(musicName: String, singer: String, art: String, imgAvata: String,linkUrl: String, ext: String, type: MusicType)
     {
         self.musicName = musicName
         self.singer = singer
