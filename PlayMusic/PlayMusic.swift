@@ -10,16 +10,7 @@ import AVKit
 
 open class PlayMusic: UIView
 {
-    let imgView: UIImageView =
-    {
-       let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "main")
-        
-        return img
-    }()
-    
-    let slider: UISlider =
+    public let slider: UISlider =
     {
        let s = UISlider()
         s.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +24,7 @@ open class PlayMusic: UIView
         return s
     }()
     
-    let lbltimerMove: UILabel =
+    public let lbltimerMove: UILabel =
     {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +34,7 @@ open class PlayMusic: UIView
         return lbl
     }()
     
-    let lbltimerEnd: UILabel =
+   public let lbltimerEnd: UILabel =
     {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -73,50 +64,39 @@ open class PlayMusic: UIView
         return lbl
     }()
     
-    let btnPrevious: UIButton =
+   public let btnPrevious: UIButton =
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
 //        btn.setTitle("<<", for: .normal)
-        btn.setImage(UIImage(named: "Back track.png"), for: .normal)
+//        btn.setImage(UIImage(named: "Back track.png"), for: .normal)
 //        btn.backgroundColor = .green
         
         return btn
     }()
     
-    let btnPlay: UIButton =
+  public let btnPlay: UIButton =
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
 //        btn.setTitle("||", for: .normal)
 //        btn.backgroundColor = .green
-        btn.setImage(UIImage(named: "icon_play.png"), for: .normal)
+//        btn.setImage(UIImage(named: "icon_play.png"), for: .normal)
         
         return btn
     }()
-//    let lbltimeSlider: UILabel =
-//    {
-//        let lbl = UILabel()
-//        lbl.translatesAutoresizingMaskIntoConstraints = false
-//        lbl.text = ""
-//        lbl.textColor = .clear
-//        lbl.textAlignment = .center
-//        lbl.isHidden = true
-//
-//        return lbl
-//    }()
     
-    let btnNext: UIButton =
+   public let btnNext: UIButton =
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
 //        btn.setTitle(">>", for: .normal)
 //        btn.backgroundColor = .green
-        btn.setImage(UIImage(named: "Fast forward.png"), for: .normal)
+//        btn.setImage(UIImage(named: "Fast forward.png"), for: .normal)
         return btn
     }()
     
-    let btnRepeat: UIButton =
+   public let btnRepeat: UIButton =
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -331,7 +311,7 @@ open class PlayMusic: UIView
         self.lbltimerMove.text = "\(min):\(secon)"
     }
     
-    func setUISliderThumbValueWithLabel(slider: UISlider) -> CGPoint
+    public func setUISliderThumbValueWithLabel(slider: UISlider) -> CGPoint
     {
         let slidertTrack : CGRect = slider.trackRect(forBounds: slider.bounds)
         let sliderFrm : CGRect = slider.thumbRect(forBounds: slider.bounds, trackRect: slidertTrack, value: slider.value)
