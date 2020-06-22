@@ -221,26 +221,26 @@ open class PlayMusic: UIView
             return
         }
         
-        if musicType == MusicType.LOCAL {
-            guard let url = Bundle.main.url(forResource: data.linkUrl, withExtension: data.ext) else {
-                return
-            }
-            do {
-                localPlayer = try AVAudioPlayer(contentsOf: url)
-                let duration = localPlayer?.duration
-                let min = Int(duration!) / 60
-                let second = Int(duration!) % 60
-                self.lbltimerEnd.text = "\(min):\(second)"
-                self.slider.maximumValue = Float(duration!)
-                
-            } catch let err {
-                print(err.localizedDescription)
-            }
-        }
-        else if musicType == MusicType.ONLINE
+//        if musicType == MusicType.LOCAL {
+//            guard let url = Bundle.main.url(forResource: data.linkUrl, withExtension: data.ext) else {
+//                return
+//            }
+//            do {
+//                localPlayer = try AVAudioPlayer(contentsOf: url)
+//                let duration = localPlayer?.duration
+//                let min = Int(duration!) / 60
+//                let second = Int(duration!) % 60
+//                self.lbltimerEnd.text = "\(min):\(second)"
+//                self.slider.maximumValue = Float(duration!)
+//
+//            } catch let err {
+//                print(err.localizedDescription)
+//            }
+//        }
+        if musicType == MusicType.ONLINE
         {
-            let url = URL(string: (self.data!.linkUrl)!)
-//            let url = URL(string: (self.url))
+//            let url = URL(string: (self.data!.linkUrl)!)
+            let url = URL(string: (self.url))
             onlinePlayer = AVPlayer(url: url!)
             guard let duration = onlinePlayer?.currentItem?.asset.duration else {
                 return
@@ -265,15 +265,15 @@ open class PlayMusic: UIView
         {
             return
         }
-        if localPlayer!.isPlaying == true
-        {
-            slider.value = Float(localPlayer!.currentTime)
-            let duration = localPlayer?.currentTime
-            let min = Int(duration!) / 60
-            let secon = Int(duration!) % 60
-            self.lbltimerMove.text = "\(min):\(secon)"
-            
-        }
+//        if localPlayer!.isPlaying == true
+//        {
+//            slider.value = Float(localPlayer!.currentTime)
+//            let duration = localPlayer?.currentTime
+//            let min = Int(duration!) / 60
+//            let secon = Int(duration!) % 60
+//            self.lbltimerMove.text = "\(min):\(secon)"
+//
+//        }
         if onlinePlayer != nil
         {
             let currentTimeBySecond = CMTimeGetSeconds((onlinePlayer!.currentTime()))
@@ -287,13 +287,13 @@ open class PlayMusic: UIView
     
     @objc func sliderValueChanged(_ sender: Any)
     {
-        localPlayer?.stop()
+//        localPlayer?.stop()
 
         print("value: \(Int(slider.value))")
        
-        localPlayer?.currentTime = TimeInterval(slider.value)
-        localPlayer?.prepareToPlay()
-        localPlayer?.play()
+//        localPlayer?.currentTime = TimeInterval(slider.value)
+//        localPlayer?.prepareToPlay()
+//        localPlayer?.play()
         
         onlinePlayer?.seek(to: CMTime(seconds: Double(slider.value), preferredTimescale: 1))
         onlinePlayer?.play()
@@ -318,25 +318,27 @@ open class PlayMusic: UIView
         print("Play")
         sender.isSelected = !sender.isSelected
 
-        if localPlayer != nil {
-            if sender.isSelected == true {
-                localPlayer?.stop()
-            } else {
-                localPlayer?.stop()
-                localPlayer?.prepareToPlay()
-                localPlayer?.play()
-            }
-        }
-        else if onlinePlayer != nil
-        {
+//        if localPlayer != nil {
+//            if sender.isSelected == true {
+//                localPlayer?.stop()
+//            } else {
+//                localPlayer?.stop()
+//                localPlayer?.prepareToPlay()
+//                localPlayer?.play()
+//            }
+//        }
+//        else if onlinePlayer != nil
+//        {
             if sender.isSelected == true
             {
                 onlinePlayer?.pause()
                 onlinePlayer?.play()
-            } else {
+            }
+            else
+            {
                 onlinePlayer?.pause()
             }
-        }
+//        }
     }
     @objc func onClickNext(_ sender: UIButton)
     {
@@ -353,11 +355,11 @@ open class PlayMusic: UIView
             tagertTime = currentTime + 10
         }
         slider.value = tagertTime
-        if localPlayer != nil
-        {
-            localPlayer?.currentTime = TimeInterval(tagertTime)
-        }
-        else if onlinePlayer != nil
+//        if localPlayer != nil
+//        {
+//            localPlayer?.currentTime = TimeInterval(tagertTime)
+//        }
+        if onlinePlayer != nil
         {
             onlinePlayer?.seek(to: CMTime(seconds: Double(tagertTime), preferredTimescale: 1))
         }
@@ -376,10 +378,12 @@ open class PlayMusic: UIView
             tagertTime = 0
         }
         slider.value = tagertTime
-        if localPlayer != nil
+//        if localPlayer != nil
+//        {
+//            localPlayer?.currentTime = TimeInterval(tagertTime)
+//        }
+        if onlinePlayer != nil
         {
-            localPlayer?.currentTime = TimeInterval(tagertTime)
-        } else if onlinePlayer != nil {
             onlinePlayer?.seek(to: CMTime(seconds: Double(tagertTime), preferredTimescale: 1))
         }
     }
@@ -389,23 +393,23 @@ open class PlayMusic: UIView
         
         sender.isSelected = !sender.isSelected
 
-        if localPlayer != nil {
-            if sender.isSelected == true {
-                print("repeat:")
-                localPlayer?.numberOfLoops = -1
-            } else {
-                print("stopRepeat")
-                localPlayer?.stop()
-            }
-        }
-        else if onlinePlayer != nil
+//        if localPlayer != nil {
+//            if sender.isSelected == true {
+//                print("repeat:")
+//                localPlayer?.numberOfLoops = -1
+//            } else {
+//                print("stopRepeat")
+//                localPlayer?.stop()
+//            }
+//        }
+        if onlinePlayer != nil
         {
             if sender.isSelected == true {
                 print("repeat:")
-                localPlayer?.numberOfLoops = -1
+//                localPlayer?.numberOfLoops = -1
             } else {
                 print("stopRepeat")
-                localPlayer?.stop()
+//                localPlayer?.stop()
             }
         }
     }
