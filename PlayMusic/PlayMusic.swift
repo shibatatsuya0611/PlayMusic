@@ -105,18 +105,18 @@ open class PlayMusic: UIView
         return btn
     }()
     
-//    var data:MusicData!
-//    {
-//        didSet
-//        {
-//            self.lblSongName.text = data.musicName
-//            self.lblSinger.text = data.singer
-//        }
-//    }
+    public var data:MusicData!
+    {
+        didSet
+        {
+            self.lblSongName.text = data.musicName
+            self.lblSinger.text = data.singer
+        }
+    }
     public var url = ""
     public var exten = ""
     
-    var musicData:[MusicData] = []
+   public var musicData:[MusicData] = []
     
     //MARK: Properties
     public enum MusicType
@@ -217,25 +217,16 @@ open class PlayMusic: UIView
     
     fileprivate func initPlayer()
     {
-//        if data == nil {
-//            return
-//        }
+        if data == nil {
+            return
+        }
         
         if musicType == MusicType.LOCAL {
-            guard let url = Bundle.main.url(forResource: self.url, withExtension: self.exten) else {
+            guard let url = Bundle.main.url(forResource: data.linkUrl, withExtension: data.ext) else {
                 return
             }
             do {
                 localPlayer = try AVAudioPlayer(contentsOf: url)
-//                let audioSession = AVAudioSession.sharedInstance()
-//                do
-//                {
-//                    try audioSession.setCategory(AVAudioSessionCategoryPlayback)
-//                }
-//                catch
-//                {
-//                    print(error)
-//                }
                 let duration = localPlayer?.duration
                 let min = Int(duration!) / 60
                 let second = Int(duration!) % 60
@@ -248,8 +239,8 @@ open class PlayMusic: UIView
         }
         else if musicType == MusicType.ONLINE
         {
-//            let url = URL(string: (self.data!.linkUrl)!)
-            let url = URL(string: (self.url))
+            let url = URL(string: (self.data!.linkUrl)!)
+//            let url = URL(string: (self.url))
             onlinePlayer = AVPlayer(url: url!)
             guard let duration = onlinePlayer?.currentItem?.asset.duration else {
                 return
