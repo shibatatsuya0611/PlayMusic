@@ -105,19 +105,21 @@ open class PlayMusic: UIView
         return btn
     }()
     
-    var data:MusicData!
-    {
-        didSet
-        {
-            self.lblSongName.text = data.musicName
-            self.lblSinger.text = data.singer
-        }
-    }
+//    var data:MusicData!
+//    {
+//        didSet
+//        {
+//            self.lblSongName.text = data.musicName
+//            self.lblSinger.text = data.singer
+//        }
+//    }
+    public var url = ""
+    public var exten = ""
     
     var musicData:[MusicData] = []
     
     //MARK: Properties
-    enum MusicType
+    public enum MusicType
     {
         case ONLINE, LOCAL, NONE
     }
@@ -134,6 +136,7 @@ open class PlayMusic: UIView
         prepareButton()
         initPlayer()
         
+        localPlayer?.prepareToPlay()
         localPlayer?.play()
         onlinePlayer?.play()
         
@@ -214,12 +217,12 @@ open class PlayMusic: UIView
     
     fileprivate func initPlayer()
     {
-        if data == nil {
-            return
-        }
+//        if data == nil {
+//            return
+//        }
         
         if musicType == MusicType.LOCAL {
-            guard let url = Bundle.main.url(forResource: data?.linkUrl, withExtension: data?.ext) else {
+            guard let url = Bundle.main.url(forResource: self.url, withExtension: self.exten) else {
                 return
             }
             do {
@@ -243,8 +246,10 @@ open class PlayMusic: UIView
                 print(err.localizedDescription)
             }
         }
-        else if musicType == MusicType.ONLINE {
-            let url = URL(string: (self.data!.linkUrl)!)
+        else if musicType == MusicType.ONLINE
+        {
+//            let url = URL(string: (self.data!.linkUrl)!)
+            let url = URL(string: (self.url))
             onlinePlayer = AVPlayer(url: url!)
             guard let duration = onlinePlayer?.currentItem?.asset.duration else {
                 return
@@ -326,12 +331,16 @@ open class PlayMusic: UIView
             if sender.isSelected == true {
                 localPlayer?.stop()
             } else {
+                localPlayer?.stop()
                 localPlayer?.prepareToPlay()
                 localPlayer?.play()
             }
         }
-        else if onlinePlayer != nil {
-            if sender.isSelected == true {
+        else if onlinePlayer != nil
+        {
+            if sender.isSelected == true
+            {
+                onlinePlayer?.pause()
                 onlinePlayer?.play()
             } else {
                 onlinePlayer?.pause()
@@ -356,7 +365,9 @@ open class PlayMusic: UIView
         if localPlayer != nil
         {
             localPlayer?.currentTime = TimeInterval(tagertTime)
-        } else if onlinePlayer != nil {
+        }
+        else if onlinePlayer != nil
+        {
             onlinePlayer?.seek(to: CMTime(seconds: Double(tagertTime), preferredTimescale: 1))
         }
     }
