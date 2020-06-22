@@ -126,7 +126,7 @@ open class PlayMusic: UIView
     
     var onlinePlayer: AVPlayer?
     var localPlayer: AVAudioPlayer?
-    var musicType: MusicType?
+    public var musicType: MusicType?
     
     public override init(frame: CGRect)
     {
