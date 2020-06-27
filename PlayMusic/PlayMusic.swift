@@ -134,10 +134,7 @@ open class PlayMusic: UIView
         
         setupUI()
         prepareButton()
-        initPlayer(url: self.url)
-        
-        
-        
+//        initPlayer(url: self.url)
         
         localPlayer?.prepareToPlay()
         localPlayer?.play()
@@ -187,7 +184,7 @@ open class PlayMusic: UIView
         btnPlay.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         btnPrevious.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 20).isActive = true
-        btnPrevious.trailingAnchor.constraint(equalTo: btnPlay.leadingAnchor, constant: 20).isActive = true
+        btnPrevious.trailingAnchor.constraint(equalTo: btnPlay.leadingAnchor, constant: -20).isActive = true
         btnPrevious.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnPrevious.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
@@ -210,14 +207,6 @@ open class PlayMusic: UIView
         btnPrevious.addTarget(self, action: #selector(onClickBack(_:)), for: .touchUpInside)
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         btnRepeat.addTarget(self, action: #selector(onClickRepeat(_:)), for: .touchUpInside)
-    }
-    
-    public func loadMusic(musicName: String, singer: String, art: String, imgAvata: String, linkUrl: String, ext: String)
-    {
-        var musicData: [MusicData] = []
-        let datamusic = MusicData()
-        datamusic.initMusicData(musicName: musicName, singer: singer, art: art, imgAvata: imgAvata, linkUrl: linkUrl, ext: ext, type: MusicData.MusicType.ONLINE)
-        musicData.append(datamusic)
     }
     public func initPlayer(url: String)
     {
@@ -288,15 +277,15 @@ open class PlayMusic: UIView
         {
             return
         }
-        if localPlayer!.isPlaying == true
-        {
-            slider.value = Float(localPlayer!.currentTime)
-            let duration = localPlayer?.currentTime
-            let min = Int(duration!) / 60
-            let secon = Int(duration!) % 60
-            self.lbltimerMove.text = "\(min):\(secon)"
-
-        }
+//        if localPlayer!.isPlaying == true
+//        {
+//            slider.value = Float(localPlayer!.currentTime)
+//            let duration = localPlayer?.currentTime
+//            let min = Int(duration!) / 60
+//            let secon = Int(duration!) % 60
+//            self.lbltimerMove.text = "\(min):\(secon)"
+//
+//        }
         if onlinePlayer != nil
         {
             let currentTimeBySecond = CMTimeGetSeconds((onlinePlayer!.currentTime()))
