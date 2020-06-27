@@ -134,7 +134,7 @@ open class PlayMusic: UIView
         
         setupUI()
         prepareButton()
-        initPlayer()
+        initPlayer(url: self.url)
         
         
         
@@ -219,9 +219,9 @@ open class PlayMusic: UIView
         datamusic.initMusicData(musicName: musicName, singer: singer, art: art, imgAvata: imgAvata, linkUrl: linkUrl, ext: ext, type: MusicData.MusicType.ONLINE)
         musicData.append(datamusic)
     }
-    func initPlayer()
+    public func initPlayer(url: String)
     {
-        let url = URL(string: (self.url))
+        let url = URL(string: (url))
         onlinePlayer = AVPlayer(url: url!)
         
         guard let duration = onlinePlayer?.currentItem?.asset.duration else
