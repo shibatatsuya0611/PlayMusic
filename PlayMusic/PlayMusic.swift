@@ -136,11 +136,27 @@ open class PlayMusic: UIView
         prepareButton()
 //        initPlayer()
         
+        
+        let url = URL(string: (self.url))
+        onlinePlayer = AVPlayer(url: url!)
+        guard let duration = onlinePlayer?.currentItem?.asset.duration else {
+            return
+        }
+        let durationBySecond = CMTimeGetSeconds(duration)
+        let min = Int(durationBySecond) / 60
+        let second = Int(durationBySecond) % 60
+        self.lbltimerEnd.text = "\(min):\(second)"
+        self.slider.maximumValue = Float(durationBySecond)
+        
+        
+        
+        
         localPlayer?.prepareToPlay()
         localPlayer?.play()
         onlinePlayer?.play()
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+        
         
         
     }
