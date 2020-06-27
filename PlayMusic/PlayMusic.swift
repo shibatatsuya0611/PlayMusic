@@ -134,19 +134,7 @@ open class PlayMusic: UIView
         
         setupUI()
         prepareButton()
-//        initPlayer()
-        
-        
-        let url = URL(string: (self.url))
-        onlinePlayer = AVPlayer(url: url!)
-        guard let duration = onlinePlayer?.currentItem?.asset.duration else {
-            return
-        }
-        let durationBySecond = CMTimeGetSeconds(duration)
-        let min = Int(durationBySecond) / 60
-        let second = Int(durationBySecond) % 60
-        self.lbltimerEnd.text = "\(min):\(second)"
-        self.slider.maximumValue = Float(durationBySecond)
+        initPlayer()
         
         
         
@@ -230,6 +218,21 @@ open class PlayMusic: UIView
         let datamusic = MusicData()
         datamusic.initMusicData(musicName: musicName, singer: singer, art: art, imgAvata: imgAvata, linkUrl: linkUrl, ext: ext, type: MusicData.MusicType.ONLINE)
         musicData.append(datamusic)
+    }
+    func initPlayer()
+    {
+        let url = URL(string: (self.url))
+        onlinePlayer = AVPlayer(url: url!)
+        
+        guard let duration = onlinePlayer?.currentItem?.asset.duration else
+        {
+            return
+        }
+        let durationBySecond = CMTimeGetSeconds(duration)
+        let min = Int(durationBySecond) / 60
+        let second = Int(durationBySecond) % 60
+        self.lbltimerEnd.text = "\(min):\(second)"
+        self.slider.maximumValue = Float(durationBySecond)
     }
     
 //    fileprivate func initPlayer()
