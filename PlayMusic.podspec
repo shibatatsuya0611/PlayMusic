@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "PlayMusic"
-  spec.version      = "3.8"
+  spec.version      = "3.9"
   spec.summary      = "A CocoaPods library written in Swift."
   spec.swift_version = "4.0"
 

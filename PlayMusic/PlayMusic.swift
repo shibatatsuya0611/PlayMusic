@@ -113,20 +113,20 @@ open class PlayMusic: UIView
 //            self.lblSinger.text = data.singer
 //        }
 //    }
-    public var url = ""
+    public var url:String = ""
     public var exten = ""
     
 //   public var musicData:[MusicData] = []
 //
 //    //MARK: Properties
-//    public enum MusicType
-//    {
-//        case ONLINE, LOCAL, NONE
-//    }
+    public enum MusicType
+    {
+        case ONLINE, LOCAL, NONE
+    }
     
     var onlinePlayer: AVPlayer?
     var localPlayer: AVAudioPlayer?
-//    public var musicType: MusicType?
+    public var musicType: MusicType?
     
     public override init(frame: CGRect)
     {
@@ -221,18 +221,23 @@ open class PlayMusic: UIView
     }
     public func initPlayer(url: String)
     {
-        let url = URL(string: (url))
-        onlinePlayer = AVPlayer(url: url!)
-        
-        guard let duration = onlinePlayer?.currentItem?.asset.duration else
+        if musicType == MusicType.ONLINE
         {
+            let url = URL(string: (url))
+            onlinePlayer = AVPlayer(url: url!)
+            guard let duration = onlinePlayer?.currentItem?.asset.duration else {
+                return
+            }
+            let durationBySecond = CMTimeGetSeconds(duration)
+            let min = Int(durationBySecond) / 60
+            let second = Int(durationBySecond) % 60
+            self.lbltimerEnd.text = "\(min):\(second)"
+            self.slider.maximumValue = Float(durationBySecond)
+        }
+        else {
             return
         }
-        let durationBySecond = CMTimeGetSeconds(duration)
-        let min = Int(durationBySecond) / 60
-        let second = Int(durationBySecond) % 60
-        self.lbltimerEnd.text = "\(min):\(second)"
-        self.slider.maximumValue = Float(durationBySecond)
+
     }
     
 //    fileprivate func initPlayer()
