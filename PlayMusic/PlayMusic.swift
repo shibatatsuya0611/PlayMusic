@@ -105,28 +105,28 @@ open class PlayMusic: UIView
         return btn
     }()
     
-    public var data:MusicData!
-    {
-        didSet
-        {
-            self.lblSongName.text = data.musicName
-            self.lblSinger.text = data.singer
-        }
-    }
+//    public var data:MusicData!
+//    {
+//        didSet
+//        {
+//            self.lblSongName.text = data.musicName
+//            self.lblSinger.text = data.singer
+//        }
+//    }
     public var url = ""
     public var exten = ""
     
-   public var musicData:[MusicData] = []
-    
-    //MARK: Properties
-    public enum MusicType
-    {
-        case ONLINE, LOCAL, NONE
-    }
+//   public var musicData:[MusicData] = []
+//
+//    //MARK: Properties
+//    public enum MusicType
+//    {
+//        case ONLINE, LOCAL, NONE
+//    }
     
     var onlinePlayer: AVPlayer?
     var localPlayer: AVAudioPlayer?
-    public var musicType: MusicType?
+//    public var musicType: MusicType?
     
     public override init(frame: CGRect)
     {
@@ -134,7 +134,7 @@ open class PlayMusic: UIView
         
         setupUI()
         prepareButton()
-        initPlayer()
+//        initPlayer()
         
         localPlayer?.prepareToPlay()
         localPlayer?.play()
@@ -210,16 +210,17 @@ open class PlayMusic: UIView
     
     public func loadMusic(musicName: String, singer: String, art: String, imgAvata: String, linkUrl: String, ext: String)
     {
+        var musicData: [MusicData] = []
         let datamusic = MusicData()
         datamusic.initMusicData(musicName: musicName, singer: singer, art: art, imgAvata: imgAvata, linkUrl: linkUrl, ext: ext, type: MusicData.MusicType.ONLINE)
         musicData.append(datamusic)
     }
     
-    fileprivate func initPlayer()
-    {
-        if data == nil {
-            return
-        }
+//    fileprivate func initPlayer()
+//    {
+//        if data == nil {
+//            return
+//        }
         
 //        if musicType == MusicType.LOCAL {
 //            guard let url = Bundle.main.url(forResource: data.linkUrl, withExtension: data.ext) else {
@@ -237,26 +238,24 @@ open class PlayMusic: UIView
 //                print(err.localizedDescription)
 //            }
 //        }
-        if musicType == MusicType.ONLINE
-        {
-//            let url = URL(string: (self.data!.linkUrl)!)
-            let url = URL(string: (self.url))
-            onlinePlayer = AVPlayer(url: url!)
-            guard let duration = onlinePlayer?.currentItem?.asset.duration else {
-                return
-            }
-            let durationBySecond = CMTimeGetSeconds(duration)
-            let min = Int(durationBySecond) / 60
-            let second = Int(durationBySecond) % 60
-            self.lbltimerEnd.text = "\(min):\(second)"
-            self.slider.maximumValue = Float(durationBySecond)
-        }
-        else {
-            return
-        }
-        
-        
-    }
+//        if musicType == MusicType.ONLINE
+//        {
+////            let url = URL(string: (self.data!.linkUrl)!)
+//            let url = URL(string: (self.url))
+//            onlinePlayer = AVPlayer(url: url!)
+//            guard let duration = onlinePlayer?.currentItem?.asset.duration else {
+//                return
+//            }
+//            let durationBySecond = CMTimeGetSeconds(duration)
+//            let min = Int(durationBySecond) / 60
+//            let second = Int(durationBySecond) % 60
+//            self.lbltimerEnd.text = "\(min):\(second)"
+//            self.slider.maximumValue = Float(durationBySecond)
+//        }
+//        else {
+//            return
+//        }
+//    }
     
     //MARK: Slider
     @objc func updateSlider()
@@ -265,15 +264,15 @@ open class PlayMusic: UIView
         {
             return
         }
-//        if localPlayer!.isPlaying == true
-//        {
-//            slider.value = Float(localPlayer!.currentTime)
-//            let duration = localPlayer?.currentTime
-//            let min = Int(duration!) / 60
-//            let secon = Int(duration!) % 60
-//            self.lbltimerMove.text = "\(min):\(secon)"
-//
-//        }
+        if localPlayer!.isPlaying == true
+        {
+            slider.value = Float(localPlayer!.currentTime)
+            let duration = localPlayer?.currentTime
+            let min = Int(duration!) / 60
+            let secon = Int(duration!) % 60
+            self.lbltimerMove.text = "\(min):\(secon)"
+
+        }
         if onlinePlayer != nil
         {
             let currentTimeBySecond = CMTimeGetSeconds((onlinePlayer!.currentTime()))
@@ -287,13 +286,14 @@ open class PlayMusic: UIView
     
     @objc func sliderValueChanged(_ sender: Any)
     {
-//        localPlayer?.stop()
+        localPlayer?.stop()
+        onlinePlayer?.pause()
 
         print("value: \(Int(slider.value))")
        
-//        localPlayer?.currentTime = TimeInterval(slider.value)
-//        localPlayer?.prepareToPlay()
-//        localPlayer?.play()
+        localPlayer?.currentTime = TimeInterval(slider.value)
+        localPlayer?.prepareToPlay()
+        localPlayer?.play()
         
         onlinePlayer?.seek(to: CMTime(seconds: Double(slider.value), preferredTimescale: 1))
         onlinePlayer?.play()
@@ -318,17 +318,17 @@ open class PlayMusic: UIView
         print("Play")
         sender.isSelected = !sender.isSelected
 
-//        if localPlayer != nil {
-//            if sender.isSelected == true {
-//                localPlayer?.stop()
-//            } else {
-//                localPlayer?.stop()
-//                localPlayer?.prepareToPlay()
-//                localPlayer?.play()
-//            }
-//        }
-//        else if onlinePlayer != nil
-//        {
+        if localPlayer != nil {
+            if sender.isSelected == true {
+                localPlayer?.stop()
+            } else {
+                localPlayer?.stop()
+                localPlayer?.prepareToPlay()
+                localPlayer?.play()
+            }
+        }
+        else if onlinePlayer != nil
+        {
             if sender.isSelected == true
             {
                 onlinePlayer?.pause()
@@ -338,7 +338,7 @@ open class PlayMusic: UIView
             {
                 onlinePlayer?.pause()
             }
-//        }
+        }
     }
     @objc func onClickNext(_ sender: UIButton)
     {
@@ -355,10 +355,10 @@ open class PlayMusic: UIView
             tagertTime = currentTime + 10
         }
         slider.value = tagertTime
-//        if localPlayer != nil
-//        {
-//            localPlayer?.currentTime = TimeInterval(tagertTime)
-//        }
+        if localPlayer != nil
+        {
+            localPlayer?.currentTime = TimeInterval(tagertTime)
+        }
         if onlinePlayer != nil
         {
             onlinePlayer?.seek(to: CMTime(seconds: Double(tagertTime), preferredTimescale: 1))
@@ -378,10 +378,10 @@ open class PlayMusic: UIView
             tagertTime = 0
         }
         slider.value = tagertTime
-//        if localPlayer != nil
-//        {
-//            localPlayer?.currentTime = TimeInterval(tagertTime)
-//        }
+        if localPlayer != nil
+        {
+            localPlayer?.currentTime = TimeInterval(tagertTime)
+        }
         if onlinePlayer != nil
         {
             onlinePlayer?.seek(to: CMTime(seconds: Double(tagertTime), preferredTimescale: 1))
@@ -393,15 +393,15 @@ open class PlayMusic: UIView
         
         sender.isSelected = !sender.isSelected
 
-//        if localPlayer != nil {
-//            if sender.isSelected == true {
-//                print("repeat:")
-//                localPlayer?.numberOfLoops = -1
-//            } else {
-//                print("stopRepeat")
-//                localPlayer?.stop()
-//            }
-//        }
+        if localPlayer != nil {
+            if sender.isSelected == true {
+                print("repeat:")
+                localPlayer?.numberOfLoops = -1
+            } else {
+                print("stopRepeat")
+                localPlayer?.stop()
+            }
+        }
         if onlinePlayer != nil
         {
             if sender.isSelected == true {
