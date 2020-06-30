@@ -2,6 +2,9 @@
 PlayMusic view
 
 
+Language recommend: swift 4
+
+
 install: Cocoapods
 
   pod 'PlayMusic'
@@ -13,9 +16,9 @@ install: Cocoapods
 + previousButtonImage
 + nextButtonImage
 + repeatButtonImage
-example: music.repeatButtonImage(image: uiimage(name: "pause"))
+  + example: music.repeatButtonImage(image: uiimage(name: "pause"))
 
 - setup name of song....
 + ishiddenTitle = true
-example: music.ishiddenTitle = true
+   + example: music.ishiddenTitle = true
          music.songName = "Huy Spring"
