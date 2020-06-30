@@ -105,7 +105,7 @@ open class PlayMusic: UIView
         return btn
     }()
     
-    var isTitleHidden = true
+    public var isTitleHidden = true
     {
         didSet
         {
