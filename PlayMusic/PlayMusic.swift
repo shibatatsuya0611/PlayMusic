@@ -250,29 +250,35 @@ open class PlayMusic: UIView
 //        btnPlay.setImage(image, for: .normal)
     }
     
-    func previousButtonImage(image: UIImage)
+    public func previousButtonImage(image: UIImage)
     {
         btnPrevious.setImage(image, for: .normal)
     }
     
-    func nextButtonImage(image: UIImage)
+    public func nextButtonImage(image: UIImage)
     {
         btnNext.setImage(image, for: .normal)
     }
     
-    func repeatButtonImage(image: UIImage)
+    public func repeatButtonImage(image: UIImage)
     {
         btnRepeat.setImage(image, for: .normal)
     }
-    func songName(text: String)
+    public func songName(text: String)
     {
         lblSongName.text = text
     }
     
-    func singerName(text: String)
+    public func singerName(text: String)
     {
         lblSinger.text = text
     }
+    
+    public func setbackgroundSlider(color: UIColor)
+    {
+        slider.backgroundColor = color
+    }
+    
     
     //MARK: Slider
     @objc func updateSlider()
