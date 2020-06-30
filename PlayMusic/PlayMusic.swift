@@ -10,7 +10,7 @@ import AVKit
 
 open class PlayMusic: UIView
 {
-    public let slider: UISlider =
+    let slider: UISlider =
     {
        let s = UISlider()
         s.translatesAutoresizingMaskIntoConstraints = false
@@ -24,7 +24,7 @@ open class PlayMusic: UIView
         return s
     }()
     
-    public let lbltimerMove: UILabel =
+    let lbltimerMove: UILabel =
     {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +34,7 @@ open class PlayMusic: UIView
         return lbl
     }()
     
-   public let lbltimerEnd: UILabel =
+   let lbltimerEnd: UILabel =
     {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ open class PlayMusic: UIView
     {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Example"
+        lbl.text = ""
         lbl.textAlignment = .center
         
         return lbl
@@ -58,13 +58,13 @@ open class PlayMusic: UIView
     {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Example"
+        lbl.text = ""
         lbl.textAlignment = .center
         
         return lbl
     }()
     
-   public let btnPrevious: UIButton =
+   let btnPrevious: UIButton =
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +75,7 @@ open class PlayMusic: UIView
         return btn
     }()
     
-  public let btnPlay: UIButton =
+  let btnPlay: UIButton =
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +86,7 @@ open class PlayMusic: UIView
         return btn
     }()
     
-   public let btnNext: UIButton =
+    let btnNext: UIButton =
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +96,7 @@ open class PlayMusic: UIView
         return btn
     }()
     
-   public let btnRepeat: UIButton =
+   let btnRepeat: UIButton =
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -105,19 +105,29 @@ open class PlayMusic: UIView
         return btn
     }()
     
-//    public var data:MusicData!
-//    {
-//        didSet
-//        {
-//            self.lblSongName.text = data.musicName
-//            self.lblSinger.text = data.singer
-//        }
-//    }
+    var isTitleHidden = true
+    {
+        didSet
+        {
+            if(isTitleHidden == false)
+            {
+                lblSongName.text = "Example"
+                lblSinger.text = "Example"
+            }
+            else
+            {
+                lblSongName.text = ""
+                lblSinger.text = ""
+            }
+        }
+    }
+    
+    var imagebuttonPlay: UIImage?
+    var imagebuttonPause: UIImage?
+    
     public var url:String = ""
     public var exten = ""
     
-//   public var musicData:[MusicData] = []
-//
 //    //MARK: Properties
     public enum MusicType
     {
@@ -134,14 +144,12 @@ open class PlayMusic: UIView
         
         setupUI()
         prepareButton()
-//        initPlayer(url: self.url)
         
         localPlayer?.prepareToPlay()
         localPlayer?.play()
         onlinePlayer?.play()
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-        
         
         
     }
@@ -206,7 +214,7 @@ open class PlayMusic: UIView
         btnNext.addTarget(self, action: #selector(onClickNext(_:)), for: .touchUpInside)
         btnPrevious.addTarget(self, action: #selector(onClickBack(_:)), for: .touchUpInside)
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
-        btnRepeat.addTarget(self, action: #selector(onClickRepeat(_:)), for: .touchUpInside)
+        btnRepeat.addTarget(self, action: #selector(onRepeat(_:)), for: .touchUpInside)
     }
     public func initPlayer(url: String)
     {
@@ -229,63 +237,50 @@ open class PlayMusic: UIView
 
     }
     
-//    fileprivate func initPlayer()
-//    {
-//        if data == nil {
-//            return
-//        }
-        
-//        if musicType == MusicType.LOCAL {
-//            guard let url = Bundle.main.url(forResource: data.linkUrl, withExtension: data.ext) else {
-//                return
-//            }
-//            do {
-//                localPlayer = try AVAudioPlayer(contentsOf: url)
-//                let duration = localPlayer?.duration
-//                let min = Int(duration!) / 60
-//                let second = Int(duration!) % 60
-//                self.lbltimerEnd.text = "\(min):\(second)"
-//                self.slider.maximumValue = Float(duration!)
-//
-//            } catch let err {
-//                print(err.localizedDescription)
-//            }
-//        }
-//        if musicType == MusicType.ONLINE
-//        {
-////            let url = URL(string: (self.data!.linkUrl)!)
-//            let url = URL(string: (self.url))
-//            onlinePlayer = AVPlayer(url: url!)
-//            guard let duration = onlinePlayer?.currentItem?.asset.duration else {
-//                return
-//            }
-//            let durationBySecond = CMTimeGetSeconds(duration)
-//            let min = Int(durationBySecond) / 60
-//            let second = Int(durationBySecond) % 60
-//            self.lbltimerEnd.text = "\(min):\(second)"
-//            self.slider.maximumValue = Float(durationBySecond)
-//        }
-//        else {
-//            return
-//        }
-//    }
+    //MARK: Button
+    public func playButtonImage(image: UIImage)
+    {
+        imagebuttonPlay = image
+        btnPlay.setImage(image, for: .normal)
+    }
+    
+    public func pauseButtonImage(image: UIImage)
+    {
+        imagebuttonPause = image
+//        btnPlay.setImage(image, for: .normal)
+    }
+    
+    func previousButtonImage(image: UIImage)
+    {
+        btnPrevious.setImage(image, for: .normal)
+    }
+    
+    func nextButtonImage(image: UIImage)
+    {
+        btnNext.setImage(image, for: .normal)
+    }
+    
+    func repeatButtonImage(image: UIImage)
+    {
+        btnRepeat.setImage(image, for: .normal)
+    }
+    func songName(text: String)
+    {
+        lblSongName.text = text
+    }
+    
+    func singerName(text: String)
+    {
+        lblSinger.text = text
+    }
     
     //MARK: Slider
     @objc func updateSlider()
     {
-        if localPlayer == nil && onlinePlayer == nil
+        if onlinePlayer == nil
         {
             return
         }
-//        if localPlayer!.isPlaying == true
-//        {
-//            slider.value = Float(localPlayer!.currentTime)
-//            let duration = localPlayer?.currentTime
-//            let min = Int(duration!) / 60
-//            let secon = Int(duration!) % 60
-//            self.lbltimerMove.text = "\(min):\(secon)"
-//
-//        }
         if onlinePlayer != nil
         {
             let currentTimeBySecond = CMTimeGetSeconds((onlinePlayer!.currentTime()))
@@ -294,19 +289,26 @@ open class PlayMusic: UIView
             let min = Int(currentTimeBySecond) / 60
             let secon = Int(currentTimeBySecond) % 60
             self.lbltimerMove.text = "\(min):\(secon)"
+            
+            if(slider.value == slider.maximumValue)
+            {
+                if(btnRepeat.isSelected == true)
+                {
+                    onClickRepeat()
+                }
+                else
+                {
+                    print("stop")
+                }
+            }
         }
     }
     
     @objc func sliderValueChanged(_ sender: Any)
     {
-        localPlayer?.stop()
         onlinePlayer?.pause()
 
         print("value: \(Int(slider.value))")
-       
-        localPlayer?.currentTime = TimeInterval(slider.value)
-        localPlayer?.prepareToPlay()
-        localPlayer?.play()
         
         onlinePlayer?.seek(to: CMTime(seconds: Double(slider.value), preferredTimescale: 1))
         onlinePlayer?.play()
@@ -326,29 +328,25 @@ open class PlayMusic: UIView
     
     //MARK: Button
     
+    
     @objc func onClickBtnPlay(_ sender: UIButton)
     {
         print("Play")
         sender.isSelected = !sender.isSelected
 
-        if localPlayer != nil {
-            if sender.isSelected == true {
-                localPlayer?.stop()
-            } else {
-                localPlayer?.stop()
-                localPlayer?.prepareToPlay()
-                localPlayer?.play()
-            }
-        }
-        else if onlinePlayer != nil
+        if onlinePlayer != nil
         {
             if sender.isSelected == true
             {
+                print("play")
+                btnPlay.setImage(imagebuttonPause, for: .normal)
                 onlinePlayer?.pause()
                 onlinePlayer?.play()
             }
             else
             {
+                print("pause")
+                btnPlay.setImage(imagebuttonPlay, for: .normal)
                 onlinePlayer?.pause()
             }
         }
@@ -368,10 +366,6 @@ open class PlayMusic: UIView
             tagertTime = currentTime + 10
         }
         slider.value = tagertTime
-        if localPlayer != nil
-        {
-            localPlayer?.currentTime = TimeInterval(tagertTime)
-        }
         if onlinePlayer != nil
         {
             onlinePlayer?.seek(to: CMTime(seconds: Double(tagertTime), preferredTimescale: 1))
@@ -391,40 +385,32 @@ open class PlayMusic: UIView
             tagertTime = 0
         }
         slider.value = tagertTime
-        if localPlayer != nil
-        {
-            localPlayer?.currentTime = TimeInterval(tagertTime)
-        }
         if onlinePlayer != nil
         {
             onlinePlayer?.seek(to: CMTime(seconds: Double(tagertTime), preferredTimescale: 1))
         }
     }
     
-    @objc func onClickRepeat(_ sender: UIButton)
+    @objc func onRepeat(_ sender: UIButton)
     {
-        
         sender.isSelected = !sender.isSelected
-
-        if localPlayer != nil {
-            if sender.isSelected == true {
-                print("repeat:")
-                localPlayer?.numberOfLoops = -1
-            } else {
-                print("stopRepeat")
-                localPlayer?.stop()
-            }
-        }
-        if onlinePlayer != nil
+        if sender.isSelected == true
         {
-            if sender.isSelected == true {
-                print("repeat:")
-//                localPlayer?.numberOfLoops = -1
-            } else {
-                print("stopRepeat")
-//                localPlayer?.stop()
-            }
+            print("repeat")
         }
+        else
+        {
+            print("false")
+        }
+    }
+    
+    func onClickRepeat()
+    {
+        print("repeat")
+        onlinePlayer?.pause()
+        slider.value = 0
+        onlinePlayer?.seek(to: CMTime(seconds: Double(slider.value), preferredTimescale: 1))
+        onlinePlayer?.play()
     }
     
 }

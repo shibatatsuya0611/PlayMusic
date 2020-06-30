@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "PlayMusic"
-  spec.version      = "4.0"
+  spec.version      = "4.5"
   spec.summary      = "A CocoaPods library written in Swift."
   spec.swift_version = "4.0"
 
@@ -93,7 +93,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.source_files  = "PlayMusic", "PlayMusic/**/*.{h,m,swift}"
-  spec.exclude_files = "PlayMusic/Exclude"
+  spec.exclude_files = "PlayMusic/*.plist"
 
   # spec.public_header_files = "Classes/**/*.h"
 
