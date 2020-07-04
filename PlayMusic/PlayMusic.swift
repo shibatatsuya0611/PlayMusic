@@ -29,6 +29,7 @@ open class PlayMusic: UIView
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "0:00"
+        lbl.font = .systemFont(ofSize: 10)
         lbl.textAlignment = .center
         
         return lbl
@@ -39,6 +40,7 @@ open class PlayMusic: UIView
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "0:00"
+        lbl.font = .systemFont(ofSize: 10)
         lbl.textAlignment = .center
         
         return lbl
@@ -145,9 +147,9 @@ open class PlayMusic: UIView
         setupUI()
         prepareButton()
         
-        localPlayer?.prepareToPlay()
-        localPlayer?.play()
-        onlinePlayer?.play()
+//        localPlayer?.prepareToPlay()
+//        localPlayer?.play()
+//        onlinePlayer?.play()
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
         
@@ -180,23 +182,23 @@ open class PlayMusic: UIView
         lbltimerEnd.topAnchor.constraint(equalTo: slider.bottomAnchor).isActive = true
         lbltimerEnd.trailingAnchor.constraint(equalTo: slider.trailingAnchor).isActive = true
         
-        lblSongName.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 20).isActive = true
+        lblSongName.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 10).isActive = true
         lblSongName.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
         lblSinger.topAnchor.constraint(equalTo: lblSongName.bottomAnchor, constant: 10).isActive = true
         lblSinger.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        btnPlay.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 20).isActive = true
+        btnPlay.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 10).isActive = true
         btnPlay.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         btnPlay.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnPlay.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        btnPrevious.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 20).isActive = true
+        btnPrevious.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 10).isActive = true
         btnPrevious.trailingAnchor.constraint(equalTo: btnPlay.leadingAnchor, constant: -20).isActive = true
         btnPrevious.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnPrevious.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        btnNext.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 20).isActive = true
+        btnNext.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 10).isActive = true
         btnNext.leadingAnchor.constraint(equalTo: btnPlay.trailingAnchor, constant: 20).isActive = true
         btnNext.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnNext.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -222,7 +224,8 @@ open class PlayMusic: UIView
         {
             let url = URL(string: (url))
             onlinePlayer = AVPlayer(url: url!)
-            guard let duration = onlinePlayer?.currentItem?.asset.duration else {
+            guard let duration = onlinePlayer?.currentItem?.asset.duration else
+            {
                 return
             }
             let durationBySecond = CMTimeGetSeconds(duration)
@@ -277,6 +280,19 @@ open class PlayMusic: UIView
     public func setbackgroundSlider(color: UIColor)
     {
         slider.backgroundColor = color
+    }
+    
+    public func play()
+    {
+        onlinePlayer?.play()
+    }
+    public func pause()
+    {
+        onlinePlayer?.pause()
+    }
+    public func rePlay()
+    {
+        onClickRepeat()
     }
     
     
