@@ -9,6 +9,10 @@ install: Cocoapods
 
   pod 'PlayMusic'
 
+- viewtype:
+  + smallView and bigView for custom 2 view playMusic
+
+
 - setup image for button:
 
 + playButtonImage
