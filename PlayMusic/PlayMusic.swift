@@ -20,6 +20,8 @@ open class PlayMusic: UIView
         s.autoresizesSubviews = true
         s.isContinuous = true
         s.thumbTintColor = .clear
+        s.minimumTrackTintColor = .purple
+        s.maximumTrackTintColor = .cyan
         
         return s
     }()
@@ -52,6 +54,7 @@ open class PlayMusic: UIView
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = ""
         lbl.textAlignment = .center
+        lbl.font = .systemFont(ofSize: 11)
         
         return lbl
     }()
@@ -62,6 +65,7 @@ open class PlayMusic: UIView
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = ""
         lbl.textAlignment = .center
+        lbl.font = .systemFont(ofSize: 11)
         
         return lbl
     }()
@@ -102,8 +106,9 @@ open class PlayMusic: UIView
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("rp", for: .normal)
-        btn.backgroundColor = .green
+        btn.setTitle("rp", for: .highlighted)
+        btn.backgroundColor = .clear
+        
         return btn
     }()
     
@@ -124,6 +129,34 @@ open class PlayMusic: UIView
         }
     }
     
+    
+    ///////////////////
+//    let lbltime: UILabel =
+//    {
+//        let lbl = UILabel()
+//        lbl.translatesAutoresizingMaskIntoConstraints = false
+//        lbl.text = ":::::::123"
+//        lbl.backgroundColor = .red
+//
+//        return lbl
+//    }()
+    
+    //MARK: Small UI
+    
+    let imgAvata: UIImageView =
+        {
+            let img = UIImageView()
+            img.translatesAutoresizingMaskIntoConstraints = false
+            img.clipsToBounds = true
+            img.layer.cornerRadius = 15
+            img.image = UIImage(named: "ProfileUserDefault")
+            
+            return img
+    }()
+    
+    
+    
+    
     var imagebuttonPlay: UIImage?
     var imagebuttonPause: UIImage?
     
@@ -136,20 +169,36 @@ open class PlayMusic: UIView
         case ONLINE, LOCAL, NONE
     }
     
+    public enum typeView
+    {
+        case small, big
+    }
+    
     var onlinePlayer: AVPlayer?
     var localPlayer: AVAudioPlayer?
     public var musicType: MusicType?
+    public var viewType: typeView?
+    {
+        didSet
+        {
+            if viewType == typeView.small
+            {
+                setupSmallUI()
+            }
+            else if viewType == typeView.big
+            {
+                setupUI()
+            }
+        }
+    }
     
     public override init(frame: CGRect)
     {
         super.init(frame: frame)
         
-        setupUI()
+        
         prepareButton()
         
-//        localPlayer?.prepareToPlay()
-//        localPlayer?.play()
-//        onlinePlayer?.play()
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
         
@@ -158,6 +207,43 @@ open class PlayMusic: UIView
     
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    fileprivate func setupSmallUI()
+    {
+        addSubview(imgAvata)
+        addSubview(lblSongName)
+        addSubview(lblSinger)
+        addSubview(btnPlay)
+        addSubview(btnNext)
+        addSubview(btnRepeat)
+        
+        imgAvata.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        imgAvata.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        imgAvata.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        imgAvata.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        lblSongName.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -2).isActive = true
+        lblSongName.leadingAnchor.constraint(equalTo: imgAvata.trailingAnchor, constant: 10).isActive = true
+        
+        lblSinger.topAnchor.constraint(equalTo: centerYAnchor, constant: 2).isActive = true
+        lblSinger.leadingAnchor.constraint(equalTo: imgAvata.trailingAnchor, constant: 10).isActive = true
+        
+        btnRepeat.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        btnRepeat.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        btnRepeat.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        btnRepeat.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        btnNext.trailingAnchor.constraint(equalTo: btnRepeat.leadingAnchor, constant: -20).isActive = true
+        btnNext.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        btnNext.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        btnNext.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        btnPlay.trailingAnchor.constraint(equalTo: btnNext.leadingAnchor, constant: -20).isActive = true
+        btnPlay.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        btnPlay.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        btnPlay.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     private func setupUI()
@@ -203,7 +289,7 @@ open class PlayMusic: UIView
         btnNext.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnNext.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        btnRepeat.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        btnRepeat.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
         btnRepeat.widthAnchor.constraint(equalToConstant: 30).isActive = true
         btnRepeat.heightAnchor.constraint(equalToConstant: 30).isActive = true
         btnRepeat.centerYAnchor.constraint(equalTo: btnNext.centerYAnchor).isActive = true
@@ -323,10 +409,11 @@ open class PlayMusic: UIView
                     print("stop")
                 }
             }
+            
         }
     }
     
-    @objc func sliderValueChanged(_ sender: Any)
+    @objc func sliderValueChanged(_ sender: UISlider)
     {
         onlinePlayer?.pause()
 
@@ -339,6 +426,9 @@ open class PlayMusic: UIView
         let min = Int(slider.value) / 60
         let secon = Int(slider.value) % 60
         self.lbltimerMove.text = "\(min):\(secon)"
+        
+//        lbltime.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//        lbltime.center = setUISliderThumbValueWithLabel(slider: sender)
     }
     
     public func setUISliderThumbValueWithLabel(slider: UISlider) -> CGPoint
