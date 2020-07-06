@@ -149,7 +149,6 @@ open class PlayMusic: UIView
             img.translatesAutoresizingMaskIntoConstraints = false
             img.clipsToBounds = true
             img.layer.cornerRadius = 15
-            img.image = UIImage(named: "ProfileUserDefault")
             
             return img
     }()
@@ -271,7 +270,7 @@ open class PlayMusic: UIView
         lblSongName.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 10).isActive = true
         lblSongName.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        lblSinger.topAnchor.constraint(equalTo: lblSongName.bottomAnchor, constant: 10).isActive = true
+        lblSinger.topAnchor.constraint(equalTo: lblSongName.bottomAnchor, constant: 5).isActive = true
         lblSinger.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
         btnPlay.topAnchor.constraint(equalTo: lblSinger.bottomAnchor, constant: 10).isActive = true
@@ -368,6 +367,11 @@ open class PlayMusic: UIView
         slider.backgroundColor = color
     }
     
+    public func setAvata(image: UIImage)
+    {
+        imgAvata.image = image
+    }
+    
     public func play()
     {
         onlinePlayer?.play()
@@ -380,6 +384,7 @@ open class PlayMusic: UIView
     {
         onClickRepeat()
     }
+    
     
     
     //MARK: Slider
