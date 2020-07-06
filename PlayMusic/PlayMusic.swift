@@ -309,6 +309,16 @@ open class PlayMusic: UIView
         {
             let url = URL(string: (url))
             onlinePlayer = AVPlayer(url: url!)
+            
+            let avsession = AVAudioSession.sharedInstance()
+            
+            do{
+                try avsession.setCategory(AVAudioSessionCategoryPlayback)
+            }
+            catch{
+                
+            }
+            
             guard let duration = onlinePlayer?.currentItem?.asset.duration else
             {
                 return
