@@ -30,7 +30,7 @@ open class PlayMusic: UIView
     {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "0:00"
+        lbl.text = "_:__"
         lbl.font = .systemFont(ofSize: 10)
         lbl.textAlignment = .center
         
@@ -41,7 +41,7 @@ open class PlayMusic: UIView
     {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "0:00"
+        lbl.text = "_:__"
         lbl.font = .systemFont(ofSize: 10)
         lbl.textAlignment = .center
         
@@ -302,6 +302,10 @@ open class PlayMusic: UIView
         btnPrevious.addTarget(self, action: #selector(onClickBack(_:)), for: .touchUpInside)
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         btnRepeat.addTarget(self, action: #selector(onRepeat(_:)), for: .touchUpInside)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped(gestureRecognizer:)))
+        self.slider.addGestureRecognizer(tapGestureRecognizer)
+        
     }
     public func initPlayer(url: String)
     {
@@ -311,13 +315,13 @@ open class PlayMusic: UIView
             onlinePlayer = AVPlayer(url: url!)
             
             let avsession = AVAudioSession.sharedInstance()
-            
             do{
                 try avsession.setCategory(AVAudioSessionCategoryPlayback)
             }
             catch{
                 
             }
+            
             
             guard let duration = onlinePlayer?.currentItem?.asset.duration else
             {
@@ -435,6 +439,9 @@ open class PlayMusic: UIView
         print("value: \(Int(slider.value))")
         
         onlinePlayer?.seek(to: CMTime(seconds: Double(slider.value), preferredTimescale: 1))
+        btnPlay.isSelected = true
+        btnPlay.setImage(imagebuttonPause, for: .normal)
+        
         onlinePlayer?.play()
 
 
@@ -442,8 +449,33 @@ open class PlayMusic: UIView
         let secon = Int(slider.value) % 60
         self.lbltimerMove.text = "\(min):\(secon)"
         
-//        lbltime.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//        lbltime.center = setUISliderThumbValueWithLabel(slider: sender)
+    }
+    @objc func sliderTapped(gestureRecognizer: UIGestureRecognizer)
+    {
+        //  print("A")
+
+        let pointTapped: CGPoint = gestureRecognizer.location(in: self)
+
+        let positionOfSlider: CGPoint = slider.frame.origin
+        let widthOfSlider: CGFloat = slider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
+
+        slider.setValue(Float(newValue), animated: true)
+        
+        onlinePlayer?.pause()
+
+        print("value: \(Int(slider.value))")
+        
+        onlinePlayer?.seek(to: CMTime(seconds: Double(slider.value), preferredTimescale: 1))
+        btnPlay.isSelected = true
+        btnPlay.setImage(imagebuttonPause, for: .normal)
+        
+        onlinePlayer?.play()
+
+
+        let min = Int(slider.value) / 60
+        let secon = Int(slider.value) % 60
+        self.lbltimerMove.text = "\(min):\(secon)"
     }
     
     public func setUISliderThumbValueWithLabel(slider: UISlider) -> CGPoint
