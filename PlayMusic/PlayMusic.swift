@@ -10,19 +10,18 @@ import AVKit
 
 open class PlayMusic: UIView
 {
-    let slider: UISlider =
+    let slider: DesginSlider =
     {
-       let s = UISlider()
+       let s = DesginSlider()
         s.translatesAutoresizingMaskIntoConstraints = false
         s.backgroundColor = .clear
         s.isUserInteractionEnabled = true
         s.clearsContextBeforeDrawing = true
         s.autoresizesSubviews = true
         s.isContinuous = true
-        s.thumbTintColor = .clear
-        s.minimumTrackTintColor = .purple
-        s.maximumTrackTintColor = .cyan
-        
+//        s.thumbTintColor = .clear
+//        s.minimumTrackTintColor = .green
+//        s.maximumTrackTintColor = .gray
         return s
     }()
     
@@ -74,9 +73,6 @@ open class PlayMusic: UIView
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.setTitle("<<", for: .normal)
-//        btn.setImage(UIImage(named: "Back track.png"), for: .normal)
-//        btn.backgroundColor = .green
         
         return btn
     }()
@@ -85,9 +81,6 @@ open class PlayMusic: UIView
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.setTitle("||", for: .normal)
-//        btn.backgroundColor = .green
-//        btn.setImage(UIImage(named: "icon_play.png"), for: .normal)
         
         return btn
     }()
@@ -96,9 +89,6 @@ open class PlayMusic: UIView
     {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.setTitle(">>", for: .normal)
-//        btn.backgroundColor = .green
-//        btn.setImage(UIImage(named: "Fast forward.png"), for: .normal)
         return btn
     }()
     
@@ -140,6 +130,17 @@ open class PlayMusic: UIView
 //
 //        return lbl
 //    }()
+    
+    let aview: UIView =
+    {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.widthAnchor.constraint(equalToConstant: 5).isActive = true
+        v.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        
+        
+        return v
+    }()
     
     //MARK: Small UI
     
@@ -197,6 +198,8 @@ open class PlayMusic: UIView
         
         
         prepareButton()
+        
+        setup()
         
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
@@ -258,12 +261,13 @@ open class PlayMusic: UIView
         addSubview(btnRepeat)
         
         slider.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        slider.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        slider.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        slider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2).isActive = true
+        slider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2).isActive = true
         slider.heightAnchor.constraint(equalToConstant: 10).isActive = true
         
+        
         lbltimerMove.topAnchor.constraint(equalTo: slider.bottomAnchor).isActive = true
-        lbltimerMove.leadingAnchor.constraint(equalTo: slider.leadingAnchor).isActive = true
+        lbltimerMove.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         lbltimerEnd.topAnchor.constraint(equalTo: slider.bottomAnchor).isActive = true
         lbltimerEnd.trailingAnchor.constraint(equalTo: slider.trailingAnchor).isActive = true
         
@@ -452,30 +456,18 @@ open class PlayMusic: UIView
     }
     @objc func sliderTapped(gestureRecognizer: UIGestureRecognizer)
     {
-        //  print("A")
-
+        
         let pointTapped: CGPoint = gestureRecognizer.location(in: self)
-
         let positionOfSlider: CGPoint = slider.frame.origin
         let widthOfSlider: CGFloat = slider.frame.size.width
         let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
 
         slider.setValue(Float(newValue), animated: true)
         
-        onlinePlayer?.pause()
 
         print("value: \(Int(slider.value))")
         
         onlinePlayer?.seek(to: CMTime(seconds: Double(slider.value), preferredTimescale: 1))
-        btnPlay.isSelected = true
-        btnPlay.setImage(imagebuttonPause, for: .normal)
-        
-        onlinePlayer?.play()
-
-
-        let min = Int(slider.value) / 60
-        let secon = Int(slider.value) % 60
-        self.lbltimerMove.text = "\(min):\(secon)"
     }
     
     public func setUISliderThumbValueWithLabel(slider: UISlider) -> CGPoint
@@ -573,3 +565,66 @@ open class PlayMusic: UIView
     }
     
 }
+extension PlayMusic
+{
+    func setup()
+    {
+        slider.addViewOnSlider = aview.createImage()
+    }
+}
+
+
+@IBDesignable
+class DesginSlider: UISlider
+{
+    @IBInspectable var thumimage: UIImage? {
+        didSet
+        {
+            setThumbImage(thumimage, for: .normal)
+        }
+    }
+    
+    @IBInspectable var thumHightLightImage: UIImage? {
+        didSet
+        {
+            setThumbImage(thumHightLightImage, for: .highlighted)
+        }
+    }
+    
+    @IBInspectable var addViewOnSlider: UIImage? {
+        didSet
+        {
+            setThumbImage(addViewOnSlider, for: .normal)
+        }
+        
+    }
+    
+}
+
+extension UIView {
+    
+    func createImage() -> UIImage {
+
+         if #available(iOS 10.0, *)
+         {
+            let renderer = UIGraphicsImageRenderer(bounds: bounds)
+            return renderer.image { rendererContext in
+                layer.render(in: rendererContext.cgContext)
+            }
+        }
+        else
+        {
+            // Fallback on earlier versions
+            let rect: CGRect = self.frame
+            UIGraphicsBeginImageContext(rect.size)
+            let context: CGContext = UIGraphicsGetCurrentContext()!
+            self.layer.render(in: context)
+            let img = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            return img!
+        }
+    }
+    
+}
+
